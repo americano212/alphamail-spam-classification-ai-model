@@ -1,13 +1,16 @@
-FROM amazon/aws-lambda-python:3.8
+# Use the Amazon Linux base image for AWS Lambda with Python 3.12
+FROM amazon/aws-lambda-python:3.12
 
-RUN /var/lang/bin/python3.8 -m pip install --upgrade pip
+# Upgrade pip to the latest version
+RUN /var/lang/bin/python3.12 -m pip install --upgrade pip
 
-RUN yum install git -y
+# Copy the lambda function script and requirements file to the container
+COPY lambda_function.py ./
+COPY requirements.txt ./
+COPY model_pt ./model_pt
 
-RUN git clone https://github.com/americano212/lambda-docker-python-ai-deploy
+# Install the Python dependencies from the requirements file
+RUN pip install --no-cache-dir -r requirements.txt
 
-RUN pip install -r lambda-docker-python-ai-deploy/requirements.txt
-
-RUN cp lambda-docker-python-ai-deploy/lambda_function.py /var/task/
-
+# Define the Lambda handler
 CMD ["lambda_function.handler"]
