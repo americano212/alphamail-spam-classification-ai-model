@@ -14,7 +14,7 @@ class inferenceModel:
         
         self.tokenizer = BertTokenizer.from_pretrained('bert-base-multilingual-cased', cache_dir='/tmp')
 
-        model_path = "/var/task/model_pt"        
+        model_path = "./model_pt"        
         self.model = BertForSequenceClassification.from_pretrained(model_path)
         
         self.model = self.model.to(self.device)
@@ -26,6 +26,7 @@ class inferenceModel:
         s = "[CLS] " + str(data).lower() + " [SEP]"
         tokenized_text = self.tokenizer.tokenize(s)
         input_id = self.tokenizer.convert_tokens_to_ids(tokenized_text)
+        input_id = input_id[:min(len(input_id), 512)]
         new_arr = [0] * 512  # 0으로 초기화된 크기 512의 리스트 생성
         new_arr[:len(input_id)] = input_id
         input_id = [new_arr]
