@@ -34,7 +34,7 @@ Deploy Python AI model with AWS Lambda
 
 ## 🔨 Dev Guide
 ### Cloud Architecture
-
+![Alphamail AI Model Architecture](https://github.com/user-attachments/assets/331939bb-79fc-45ec-91d7-c8165c058a21)
 
 ### Deploy function
 1. Update model with `model.safetensors` file `./model_pt`
