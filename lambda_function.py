@@ -14,7 +14,7 @@ class inferenceModel:
         
         self.tokenizer = BertTokenizer.from_pretrained('bert-base-multilingual-cased', cache_dir='/tmp')
 
-        model_path = "./model_pt"        
+        model_path = "/var/task/model_pt" # "./model_pt"
         self.model = BertForSequenceClassification.from_pretrained(model_path)
         
         self.model = self.model.to(self.device)
